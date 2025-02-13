@@ -9,9 +9,9 @@ Just a template of my flask projects, has the following things:
 
 # TODO
 
-[ ] Add a system where users can create accounts via username and password
-[ ] Add a "profile" page where username can be changed (and password)
-[ ] Add a branch with a forum system
+- [ ] Add a system where users can create accounts via username and password
+- [ ] Add a "profile" page where username can be changed (and password)
+- [ ] Add a branch with a forum system
 
 
 

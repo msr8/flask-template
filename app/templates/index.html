@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="{{ url_for('auth.page_login') }}">Login</a>
-    <a href="{{ url_for('auth.page_logout') }}">Logout</a>
-    <a href="{{ url_for('root.page_session') }}">Session</a>
+{% extends "base.html" %}
 
-    <br><br><br>
+{% block title %}Home{% endblock %}
 
-    Hello World!
-</body>
-</html>
+{% block content %}
+    <h1>Welcome to the Home Page</h1>
+    <p>This is the home page of the app</p>
+{% endblock %}

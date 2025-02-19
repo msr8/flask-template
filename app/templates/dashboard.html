@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='dashboard.css') }}">
+    <script src="{{ url_for('static',filename='dashboard.js') }}" defer></script>
+{% endblock %}
+
+
+
+{% block content %}
+    <!-- This span is NECESSARY, so that its content can be updated when the username gets changed -->
+    Username: <span id="username">{{session.get('username','')}}</span><br>
+    Email: {{session.get('email','')}}<br>
+
+    <br><br><br>
+
+    <button onclick="changeUsername()">Change Username</button>
+
+    <br><br><br>
+
+    <a href="{{ url_for('auth.page_logout') }}">Logout</a>
+{% endblock %}

@@ -46,7 +46,8 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
     # Register API resources
-    api.add_resource(TestAPI, '/api/test')
+    api.add_resource(TestAPI,           '/api/test')
+    api.add_resource(ChangeUsernameAPI, '/api/auth/change-username')
 
 
     return app

@@ -10,9 +10,8 @@ Just a template of my flask projects, has the following things:
 # TODO
 
 - [ ] Add a system where users can create accounts via username and password
-- [ ] Add a "profile" page where username can be changed (and password)
-- [ ] Change "me" to "dashboard"
-- [ ] Add a template inheritence system for navbar
+- [X] Add a "dashboard" page where username can be changed (and password)
+- [X] Add a template inheritence system for navbar
 - [ ] Add a branch with a forum system
 
 

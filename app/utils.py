@@ -1,6 +1,9 @@
 from app.consts import *
+
 from flask import request, session, redirect, url_for, flash, get_flashed_messages
+
 from functools import wraps
+from re import match
 
 
 
@@ -22,5 +25,11 @@ def login_required(json=False):
         
         return inner
     return wrapper
+
+
+
+
+def check_email(to_check:str) -> bool:
+    return bool(match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', to_check))
 
 

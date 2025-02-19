@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 LOGIN_FAIL_REDIRECT  = 'google.login'
-POST_LOGIN_REDIRECT  = 'root.page_me'
+POST_LOGIN_REDIRECT  = 'root.page_dashboard'
 POST_LOGOUT_REDIRECT = 'root.page_index'
 
 GOOGLE_CLIENT_ID     = environ.get('GOOGLE_CLIENT_ID')

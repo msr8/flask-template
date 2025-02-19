@@ -49,7 +49,7 @@ def page_session():
 
 
 
-@root_bp.route('/me')
+@root_bp.route('/dashboard')
 @login_required() # ALWAYS remember to keep login_required() below the route decorator, otherwise it will not work (idfk why)
-def page_me():
-    return 'You are logged in hehe'
+def page_dashboard():
+    return render_template('dashboard.html')

@@ -1,6 +1,6 @@
 from app.models     import *
 from app.consts     import *
-from app.utils      import login_required
+from app.utils      import login_required, check_email
 from app.extensions import db
 
 from flask import Blueprint, redirect, url_for, session, render_template, request
@@ -9,9 +9,9 @@ from flask_dance.contrib.google import google
 from oauthlib.oauth2.rfc6749.errors import TokenExpiredError
 
 from bcrypt import hashpw, gensalt, checkpw
-from re import match
 
 auth_bp = Blueprint('auth', __name__)
+
 
 
 
@@ -44,6 +44,7 @@ def page_google_authorised():
         username = email.split('@')[0]
         user = User(email=resp['email'], username=resp['email'].split('@')[0])
         db.session.add(user)
+        db.session.add(Usernames(username=username, email=email))
         db.session.commit()
     else:
         username = user.username
@@ -67,6 +68,34 @@ def page_logout():
 
 
 
+
+
+class ChangeUsernameAPI(Resource):
+    @login_required(json=True)
+    def post(self):
+        # Extract data
+        new_username = request.get_json().get('new_username')
+        if not new_username: return {'message': 'New username not provided', 'status': 'error'}, 400
+
+        # Check if the username is a valid email address
+        if check_email(new_username): return {'message': 'Username cannot be an email address', 'status': 'error'}, 400
+        # Check if the username is already taken
+        if Usernames.query.get(new_username): return {'message': 'Username already taken', 'status': 'error'}, 400
+        # Check if the username is the same as the current one
+        if session['username'] == new_username: return {'message': 'Please provide a username different from the current one', 'status': 'error'}, 400
+        
+        # Update the username
+        user          = db.session.get(User, session['email'])
+        old_username  = user.username
+        user.username = new_username
+        # Update the username in the Usernames table
+        Usernames.query.get(old_username).username = new_username
+        db.session.commit()
+        
+        # Update the session
+        session['username'] = new_username
+        
+        return {'status': 'success'}
 
 
 

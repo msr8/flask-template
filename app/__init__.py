@@ -47,7 +47,10 @@ def create_app():
 
     # Register API resources
     api.add_resource(TestAPI,           '/api/test')
+    api.add_resource(LoginAPI,          '/api/auth/login')
+    api.add_resource(SignupAPI,         '/api/auth/signup')
     api.add_resource(ChangeUsernameAPI, '/api/auth/change-username')
+    api.add_resource(ChangePasswordAPI, '/api/auth/change-password')
 
 
     return app

@@ -1,4 +1,6 @@
-from app.consts import *
+from app.consts     import *
+from app.models     import *
+from app.extensions import db
 
 from flask import request, session, redirect, url_for, flash, get_flashed_messages
 
@@ -33,3 +35,8 @@ def check_email(to_check:str) -> bool:
     return bool(match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', to_check))
 
 
+
+
+def check_google_signup(email:str) -> bool:
+    user = db.session.get(User, session['email'])    
+    return user and (user.password is None)
